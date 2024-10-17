@@ -50,7 +50,6 @@ public class UserTest {
     @Test 
     public void check_reserved_no_reservation_test() {
         assertFalse(arshia.checkReserved(restaurant1));
-        assertEquals(arshia.getReservations().size(), 0);
     }
 
     @Test
@@ -60,11 +59,50 @@ public class UserTest {
     }
 
     @Test
+    public void check_reserved_cancelled_reservation_test(){
+        arshia.addReservation(reservation1);
+        reservation1.cancel();
+        assertFalse(arshia.checkReserved(restaurant1));
+    }
+
+
+    @Test
+    public void get_reservations_no_reservation_test(){
+        assertEquals(arshia.getReservations().size(), 0);
+    }
+
+    @Test
+    public void get_reservations_one_reservation_test(){
+        arshia.addReservation(reservation1);
+        List<Reservation> reservations = arshia.getReservations();
+        assertEquals(reservations.size(), 1);
+        assertEquals(reservation1.getReservationNumber(), reservations.get(0).getReservationNumber());
+    }
+
+    @Test
+    public void get_reservation_no_resrvations(){
+        assertNull(arshia.getReservation(0));
+    }
+
+    @Test
+    public void get_reservation(){
+        arshia.addReservation(reservation1);
+        assertEquals(arshia.getReservation(0).getReservationNumber(), reservation1.getReservationNumber());
+    }
+
+    @Test
+    public void get_reservation_invalid_reservation_number(){
+        arshia.addReservation(reservation1);
+        assertNull(arshia.getReservation(reservation1.getReservationNumber() + 1));
+    }
+    
+    @Test
     public void get_reservation_cancelled_reservation_test(){
         arshia.addReservation(reservation1);
         reservation1.cancel();
         assertNull(arshia.getReservation(0));
         assertFalse(arshia.checkReserved(restaurant1));
     }
+
 
 }
