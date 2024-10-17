@@ -1,8 +1,6 @@
-package model;
-import mizdooni.model.*;
+package mizdooni.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -32,8 +30,5 @@ public class UserTest {
         assertEquals(reservations.size(), 1);
         assertEquals(reservation1.getReservationNumber(), reservations.get(0).getReservationNumber());
     }
-
-    @Test
-    public void
 
 }
