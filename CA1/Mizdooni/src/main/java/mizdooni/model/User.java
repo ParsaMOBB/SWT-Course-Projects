@@ -3,6 +3,7 @@ package mizdooni.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class User {
     public enum Role {
@@ -53,7 +54,7 @@ public class User {
     }
 
     public List<Reservation> getReservations() {
-        return reservations;
+        return reservations.stream().filter(r -> !r.isCancelled()).collect(Collectors.toList());
     }
 
     public boolean checkPassword(String pass) {
