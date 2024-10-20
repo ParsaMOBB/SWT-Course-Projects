@@ -19,7 +19,7 @@ public class TableTest {
     public void setup(){
         restaurant1 = new Restaurant("Little", manager1, "Pizza", LocalTime.parse("08:00"), LocalTime.parse("22:00"), "Pizza midim, Napolitan!", new Address("Iran", "Tehran", "Vanak Park"), "Chara Nadarim ?");
         table1 = new Table(1, restaurant1.getId(), 4);
-        manager1 = new User("Arshia", "aa", "arhia@gmail.com", new Address("Iran", "Tehran", "Amir Abad"), User.Role.manager);
+        manager1 = new User("Arshia", "aa", "arshia@gmail.com", new Address("Iran", "Tehran", "Amir Abad"), User.Role.manager);
         costumer1 = new User("Mobed", "Khake Pa", "mobed@gmail.com", new Address("Iran", "Tehran", "Valfajr"), User.Role.client);
 
     }
