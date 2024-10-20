@@ -43,6 +43,23 @@ public class RestaurantTest {
     }
 
     @Test
+    public void get_table_not_found_test() {
+        Table table = new Table(1, restaurant.getId(), 4);
+        restaurant.addTable(table);
+        assert(restaurant.getTable(2) == null);
+    }
+
+    @Test
+    public void get_table_no_table_test() {
+        assert(restaurant.getTable(1) == null);
+    }
+
+    @Test 
+    public void get_tables_no_table_test() {
+        assert(restaurant.getTables().size() == 0);
+    }
+
+    @Test
     public void add_review_test() {
         Rating rating = new Rating();
         rating.food = 5;
@@ -70,31 +87,50 @@ public class RestaurantTest {
     }
 
     @Test
+    public void no_review_test() {
+        assert(restaurant.getReviews().size() == 0);
+    }
+
+    @Test
+    public void get_average_rating_no_review_test() {
+        Rating average = restaurant.getAverageRating();
+        assert(average.food == 0);
+        assert(average.service == 0);
+        assert(average.ambiance == 0);
+        assert(average.overall == 0);
+    }
+
+    @Test
     public void get_average_rating_test() {
         Rating rating = new Rating();
-        rating.food = 5;
-        rating.service = 5;
-        rating.ambiance = 5;
-        rating.overall = 5;
-        Review review = new Review(costumer, rating, "Great food, great service", LocalDateTime.now());
+        rating.food = 3;
+        rating.service = 3;
+        rating.ambiance = 3;
+        rating.overall = 3;
+        Review review = new Review(costumer, rating, "Mid", LocalDateTime.now());
         restaurant.addReview(review);
         Rating average = restaurant.getAverageRating();
-        assert(average.food == 5);
-        assert(average.service == 5);
-        assert(average.ambiance == 5);
-        assert(average.overall == 5);
+        assert(average.food == 3);
+        assert(average.service == 3);
+        assert(average.ambiance == 3);
+        assert(average.overall == 3);
+    }
+
+    @Test
+    public void get_star_count_no_review_test() {
+        assert(restaurant.getStarCount() == 0);
     }
 
     @Test
     public void get_star_count_test() {
         Rating rating = new Rating();
-        rating.food = 5;
-        rating.service = 5;
+        rating.food = 4;
+        rating.service = 4;
         rating.ambiance = 5;
-        rating.overall = 5;
-        Review review = new Review(costumer, rating, "Great food, great service", LocalDateTime.now());
+        rating.overall = 4.3;
+        Review review = new Review(costumer, rating, "Great ambience, not the best food", LocalDateTime.now());
         restaurant.addReview(review);
-        assert(restaurant.getStarCount() == 5);
+        assert(restaurant.getStarCount() == 4);
     }
 
     @Test
