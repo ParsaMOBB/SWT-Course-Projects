@@ -54,7 +54,7 @@ public class User {
     }
 
     public List<Reservation> getReservations() {
-        return reservations.stream().filter(r -> !r.isCancelled()).collect(Collectors.toList());
+        return reservations;
     }
 
     public boolean checkPassword(String pass) {

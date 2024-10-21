@@ -108,7 +108,10 @@ public class UserTest {
     public void get_reservations_after_cancelling_test(){
         arshia.addReservation(reservation1);
         reservation1.cancel();
-        assertEquals(0, arshia.getReservations().size());
+        assertEquals(1, arshia.getReservations().size());
     }
 
+    
+
 }
+
