@@ -146,8 +146,6 @@ public class RestaurantTest {
         restaurant.addTable(table2);
         Table table3 = new Table(3, restaurant.getId(), 2);
         restaurant.addTable(table3);
-        Table table4 = new Table(4, restaurant.getId(), 8);
-        restaurant.addTable(table4);
-        assert(restaurant.getMaxSeatsNumber() == 8);
+        assert(restaurant.getMaxSeatsNumber() == 6);
     }
 }

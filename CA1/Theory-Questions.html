@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Theory-Questions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 style="overflow: auto;">
+    <span style="float: left;">تمرین اول</span>
+    <span style="float: right;">آزمون نرم‌افزار</span>
+</h1>
+<div style="clear: both;"></div>
+<div dir="rtl">
+<h2 id="%D8%A8%D8%AE%D8%B4-%D8%AA%D8%A6%D9%88%D8%B1%DB%8C">بخش تئوری</h2>
+<h3 id="%D8%A7%D9%85%DB%8C%D8%B1-%D9%BE%D8%A7%D8%B1%D8%B3%D8%A7-%D9%85%D9%88%D8%A8%D8%AF-%E2%80%8C-%DB%B8%DB%B1%DB%B0%DB%B1%DB%B0%DB%B0%DB%B2%DB%B7%DB%B1">امیر پارسا موبد |‌ ۸۱۰۱۰۰۲۷۱</h3>
+<h3 id="%D8%A7%D8%B1%D8%B4%DB%8C%D8%A7-%D8%B9%D8%B7%D8%A7%DB%8C%DB%8C-%E2%80%8C-%DB%B8%DB%B1%DB%B0%DB%B1%DB%B0%DB%B0%DB%B2%DB%B5%DB%B2">ارشیا عطایی |‌ ۸۱۰۱۰۰۲۵۲</h3>
+<h3 id="%D8%A2%D8%AF%D8%B1%D8%B3-%D9%85%D8%AE%D8%B2%D9%86-%E2%80%8C-httpsgithubcomparsamobbswt-course-projects">آدرس مخزن :‌ https://github.com/ParsaMOBB/SWT-Course-Projects</h3>
+<h3 id="%D8%B4%D9%86%D8%A7%D8%B3%D9%87-%D8%A2%D8%AE%D8%B1%DB%8C%D9%86-%DA%A9%D8%A7%D9%85%DB%8C%D8%AA--97b52ef791bb53d84ba3325fc4f8931a8fd65ff2">شناسه آخرین کامیت : 97b52ef791bb53d84ba3325fc4f8931a8fd65ff2</h3>
+<hr>
+<h3 id="%D8%B3%D9%88%D8%A7%D9%84-%DB%B1">سوال ۱</h3>
+<p>در زبان جاوا، متدهای Assume از کتابخانه‌های تست (مانند JUnit) برای کنترل اجرای تست‌ها استفاده می‌شوند. هدف این متدها این است که مشخص کنند آیا شرایطی برای اجرای یک تست مهیا است یا نه. اگر شرط برقرار نباشد، تست به جای شکست خوردن، نادیده گرفته می‌شود.</p>
+<p><strong>متد AssumeTrue:</strong></p>
+<p>این متد برای بررسی یک شرط بولی به کار می‌رود. اگر شرط true باشد، تست اجرا می‌شود، و اگر false باشد، تست نادیده گرفته می‌شود (نه اینکه شکست بخورد). این روش برای تست‌هایی که وابسته به محیط، پیکربندی، یا شرایط خاصی هستند، مناسب است.</p>
+<p><strong>مثال:</strong></p>
+</div>
+<pre class="hljs"><code><div><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testOnlyOnWindows</span><span class="hljs-params">()</span> </span>{
+    Assume.assumeTrue(System.getProperty(<span class="hljs-string">"os.name"</span>).startsWith(<span class="hljs-string">"Windows"</span>));
+}
+</div></code></pre>
+<div dir="rtl">
+<p>در این مثال، اگر سیستم‌عامل ویندوز نباشد، تست نادیده گرفته می‌شود.</p>
+</div>
+<div dir="rtl">
+<h3 id="%D8%B3%D9%88%D8%A7%D9%84-%DB%B2">سوال ۲</h3>
+<p>می‌توان از آزمون واحد برای تست کدهای چند-نخی استفاده کرد، اما این روش به دلیل وجود مشکلات همزمانی و شرایط رقابتی (race conditions) به سادگی نمی‌تواند تمامی جوانب ایمنی رشته‌ها (thread-safety) را تضمین کند. یکی از چالش‌های اصلی این است که مشکلات همزمانی معمولاً تصادفی و غیرقابل پیش‌بینی هستند، بنابراین در یک اجرای واحد از تست ممکن است ظاهر نشوند. همچنین، بسیاری از این مشکلات تحت شرایط زمانی خاصی رخ می‌دهند که ممکن است در طول یک تست کوتاه دیده نشوند.</p>
+<p>برای اطمینان بیشتر، بهتر است از ابزارهای تخصصی همزمانی مثل <strong>JCStress</strong> استفاده شود که توانایی شبیه‌سازی شرایط پیچیده‌تر را دارند. همچنین، استفاده از سازوکارهای مناسب همزمانی، مانند synchronized، Lock یا کلاس‌های java.util.concurrent، از ابتدا ضروری است. در نهایت، آزمون واحد به‌عنوان بخشی از یک رویکرد جامع می‌تواند مفید باشد، اما به‌تنهایی نمی‌تواند thread-safety را تضمین کند.</p>
+</div>
+<div dir="rtl">
+<h3 id="%D8%B3%D9%88%D8%A7%D9%84-%DB%B3">سوال ۳</h3>
+<p>استفاده از کنسول برای پرینت خروجی به‌جای Assert چند ایراد دارد:</p>
+<ol>
+<li>
+<p><strong>بررسی دستی نتایج</strong>: با پرینت به کنسول، باید نتایج را دستی بررسی کنید، در حالی که Assert بررسی خودکار دارد.</p>
+</li>
+<li>
+<p><strong>گزارش‌دهی نامناسب</strong>: Assert در صورت شکست، گزارش دقیق و traceback ارائه می‌دهد، اما پرینت این ویژگی را ندارد.</p>
+</li>
+<li>
+<p><strong>عدم مقیاس‌پذیری</strong>: بررسی دستی در پروژه‌های بزرگ زمان‌بر است، ولی Assert به‌صورت خودکار نتایج را مدیریت می‌کند.</p>
+</li>
+<li>
+<p><strong>عدم سازگاری با CI/CD</strong>: ابزارهای CI نیاز به گزارش خودکار دارند، که با Assert فراهم می‌شود، اما پرینت چنین قابلیتی ندارد.</p>
+</li>
+</ol>
+</div>
+<div dir="rtl">
+<h3 id="%D8%B3%D9%88%D8%A7%D9%84-%DB%B4">سوال ۴</h3>
+<p>الف) مشکل آزمون:</p>
+<ol>
+<li>
+<p><strong>نحوه انتظار استثنا</strong>: عبارت expects Exception اشتباه است.</p>
+</li>
+<li>
+<p><strong>نوع استثنا</strong>: استفاده از Exception عمومی دقیق نیست؛ بهتر است نوع خاص استثنا مشخص شود.</p>
+</li>
+</ol>
+<p>راه‌حل: از assertThrows در Junit 5 یا @Test(expected = SomeException.class) در Junit 4 استفاده کنید:</p>
+</div>
+<pre class="hljs"><code><div><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testB</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> badInput = <span class="hljs-number">0</span>;
+    assertThrows(IllegalArgumentException<span class="hljs-class">.<span class="hljs-keyword">class</span>, () -&gt; <span class="hljs-title">new</span> <span class="hljs-title">AnotherClass</span>().<span class="hljs-title">process</span>(<span class="hljs-title">badInput</span>))</span>;
+}
+</div></code></pre>
+<div dir="rtl">
+<p>ب)</p>
+<p>مشکل این کد در وابستگی بین تست‌هاست، زیرا هر دو تست از یک نمونه مشترک Calculator استفاده می‌کنند. این می‌تواند منجر به نتایج غیرمنتظره شود.</p>
+<p><strong>مشکلات:</strong></p>
+<ol>
+<li><strong>وابستگی بین تست‌ها</strong>: تغییر حالت Calculator در یک تست می‌تواند بر تست دیگر تأثیر بگذارد.</li>
+</ol>
+<p><strong>راه‌حل:</strong></p>
+<ol>
+<li><strong>ایجاد یک نمونه جدید برای هر تست</strong>: استفاده از @BeforeEach برای بازنشانی حالت Calculator قبل از هر تست.</li>
+</ol>
+<p>مثال:</p>
+</div>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestCalculator</span> </span>{
+    Calculator fixture;
+
+    <span class="hljs-meta">@BeforeEach</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUp</span><span class="hljs-params">()</span> </span>{
+        fixture = Calculator.getInstance();
+        fixture.setInitialValue(<span class="hljs-number">0</span>);
+    }
+
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testAccumulate</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">int</span> result = fixture.accumulate(<span class="hljs-number">50</span>);
+        Assertions.assertEquals(<span class="hljs-number">50</span>, result);
+    }
+
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testSubsequentAccumulate</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">int</span> result = fixture.accumulate(<span class="hljs-number">100</span>);
+        Assertions.assertEquals(<span class="hljs-number">100</span>, result);
+    }
+}
+</div></code></pre>
+
+</body>
+</html>
