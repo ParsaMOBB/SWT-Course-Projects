@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Theory-Questions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 style="overflow: auto;">
+    <span style="float: left;">تمرین دوم</span>
+    <span style="float: right;">آزمون نرم‌افزار</span>
+</h1>
+<div style="clear: both;"></div>
+<div dir="rtl">
+<h2 id="%D8%A8%D8%AE%D8%B4-%D8%AA%D8%A6%D9%88%D8%B1%DB%8C">بخش تئوری</h2>
+<h3 id="%D8%A7%D9%85%DB%8C%D8%B1-%D9%BE%D8%A7%D8%B1%D8%B3%D8%A7-%D9%85%D9%88%D8%A8%D8%AF-%E2%80%8C-%DB%B8%DB%B1%DB%B0%DB%B1%DB%B0%DB%B0%DB%B2%DB%B7%DB%B1">امیر پارسا موبد |‌ ۸۱۰۱۰۰۲۷۱</h3>
+<h3 id="%D8%A7%D8%B1%D8%B4%DB%8C%D8%A7-%D8%B9%D8%B7%D8%A7%DB%8C%DB%8C-%E2%80%8C-%DB%B8%DB%B1%DB%B0%DB%B1%DB%B0%DB%B0%DB%B2%DB%B5%DB%B2">ارشیا عطایی |‌ ۸۱۰۱۰۰۲۵۲</h3>
+<h3 id="%D8%A2%D8%AF%D8%B1%D8%B3-%D9%85%D8%AE%D8%B2%D9%86-%E2%80%8C-httpsgithubcomparsamobbswt-course-projects">آدرس مخزن :‌ https://github.com/ParsaMOBB/SWT-Course-Projects</h3>
+<h3 id="%D8%B4%D9%86%D8%A7%D8%B3%D9%87-%D8%A2%D8%AE%D8%B1%DB%8C%D9%86-%DA%A9%D8%A7%D9%85%DB%8C%D8%AA--5ceb14aad3844851dd2aab593824166c9370bb56">شناسه آخرین کامیت : 5ceb14aad3844851dd2aab593824166c9370bb56</h3>
+<hr>
+<h3 id="%D8%B3%D9%88%D8%A7%D9%84-%DB%B1">سوال ۱</h3>
+<p>behavior verification به بررسی این می‌پردازد که آیا یک متد خاص (مانند یک تابع یا عمل) در یک زمان خاص فراخوانی شده است یا خیر. به عبارتی دیگر، این نوع تأیید بر روی رفتار سیستم متمرکز است برای این verification، معمولاً از mockها استفاده می‌شود، زیرا این امکان را به ما می‌دهند که از dummyهای آموزش‌دیده‌ای که برای پاسخگویی به سناریوهای خاص تنظیم شده‌اند بهره ببریم. به این ترتیب، می‌توانیم انتظارات خود را درباره نحوه تعامل آنها با یکدیگر مشخص کنیم.
+از سمتی دیگر state verification به بررسی وضعیت نهایی یک شیء یا سیستم پس از اجرای یک یا چند عمل می‌پردازد. در این حالت، ما بررسی می‌کنیم که آیا وضعیت شیء به درستی تغییر کرده است یا خیر. این کار را با استفاده از stubها انجام می‌دهیم که پیچیدگی خاصی ندارند و فقط پاسخ‌های ثابتی به فراخوانی متدها ارائه می‌دهند، بدون اینکه نحوه فراخوانی آنها را بررسی کنند. به این ترتیب، stubها نتایجی را که برای ارزیابی وضعیت نهایی نیاز داریم فراهم می‌کنند.</p>
+<h3 id="%D8%B3%D9%88%D8%A7%D9%84-%DB%B2">سوال ۲</h3>
+<p>spy-Testها نوعی از double-test‌ها هستند که اطلاعات مربوط به نحوه فراخوانی‌هایشان را در طول یک تست ذخیره می‌کنند. این قابلیت به برنامه‌نویسان امکان می‌دهد که در حین تست منطق کلی سیستم، رفتار یک بخش خاص را نیز مشاهده و بررسی کنند. spy-Testها به دلیل انعطاف‌پذیری بالایشان می‌توانند در سناریوهای تایید (verification) و مشاهده (observation) استفاده شوند، و به همین دلیل ابزاری چندمنظوره در toolkit تست به شمار می‌روند. از مزایای spy-testها می‌توان به امکان مشاهده تعاملات، انعطاف بالا و نیاز به تنظیمات کمتر اشاره کرد. این تست‌ها با کاهش نیاز به code setup پیچیده، فرآیند تست را ساده کرده و در عین حال وضوح تعاملات بین بخش‌ها را حفظ می‌کنند.</p>
+<p>انواع spy-testها:</p>
+<ul>
+<li><strong>Spies Basic:</strong> این اسپای‌ها دور متدهای فعلی پیچیده می‌شوند تا بتوانند فراخوانی‌ها و پارامترها را ثبت کنند، در حالی که رفتار متد اصلی را تغییر نمی‌دهند.</li>
+<li><strong>Spies Behavioral:</strong> این نوع اسپای‌ها علاوه بر ثبت فراخوانی‌ها، قادر به تغییر رفتار در هنگام فراخوانی نیز هستند. برای مثال، ممکن است بر اساس آرگومان‌های ورودی، خروجی‌های مختلفی ارائه دهند.</li>
+<li><strong>Spies Thread-safe:</strong> این اسپای‌ها در تست‌های همزمان به‌کار می‌روند تا تعاملات را به صورت دقیق و بدون تداخل ناشی از تردهای موازی ثبت کنند.</li>
+</ul>
+<h3 id="%D8%B3%D9%88%D8%A7%D9%84-%DB%B3">سوال ۳</h3>
+<p>الف) در شرایطی که آماده‌سازی یک <strong>Fixture</strong> (یا محیط آزمون) زمان‌بر است و چندین آزمون از یک مجموعه داده ثابت استفاده می‌کنند، استفاده از <strong>Fixture Shared</strong> مناسب‌تر است. در این حالت، به جای بازسازی کامل Fixture برای هر آزمون، یک نمونه مشترک از آن ایجاد می‌شود و در طول تست‌ها به اشتراک گذاشته می‌شود. این کار باعث صرفه‌جویی در زمان و بهبود کارایی آزمون‌ها می‌شود.
+اما اگر هر آزمون نیاز به حالتی تمیز و بدون تغییر داشته باشد که توسط دیگر آزمون‌ها تحت تأثیر قرار نگیرد، باید از <strong>Fixture Fresh</strong> استفاده کرد، چرا که این روش برای هر آزمون یک Fixture جدید ایجاد می‌کند.</p>
+<p>ب) <strong>Setup Lazy</strong> مزیت‌هایی دارد از جمله اینکه فقط زمانی اجرا می‌شود که واقعاً به آن نیاز باشد، که این کار از اجرای غیرضروری تست‌ها جلوگیری می‌کند و سرعت اجرای تست‌ها را در مواقعی که برخی قسمت‌های سیستم نیاز به setup ندارند، افزایش می‌دهد. اما عیب آن این است که تا زمانی که آزمونی از setup استفاده نکند، پیاده‌سازی انجام نمی‌شود؛ بنابراین، ممکن است در مواقعی که وابستگی‌ها پیچیده باشند، ردیابی و اشکال‌یابی مشکلات سخت‌تر شود.</p>
+<p>از سوی دیگر، <strong>Setup Fixture Suite</strong> تمام setup‌های موردنیاز را از ابتدا آماده می‌کند که این کار باعث می‌شود همه‌ی تست‌ها از ابتدا در یک حالت مشخص و ثابت اجرا شوند و از بروز وابستگی‌ها و تداخل‌های ناخواسته بین تست‌ها جلوگیری می‌کند. این روش قابلیت اطمینان بیشتری دارد، اما به دلیل اجرای کامل setup، زمان بیشتری نیاز دارد و منابع بیشتری مصرف می‌کند، حتی اگر تمام تست‌ها به همه قسمت‌های setup نیازی نداشته باشند.</p>
+<p>ج) برای اطمینان از اینکه تست‌ها در برابر تغییرات ناخواسته به یک Fixture مشترک مقاوم هستند، چند رویکرد مناسب وجود دارد:</p>
+<ol>
+<li>
+<p><strong>Fixture Fresh</strong>: یکی از بهترین رویکردها استفاده از Fixture Fresh است؛ یعنی برای هر تست یک Fixture جدید ساخته می‌شود که پس از اجرای تست حذف می‌شود. این روش استقلال کامل تست‌ها را تضمین کرده و از تأثیر تغییرات ایجاد شده در سایر تست‌ها جلوگیری می‌کند.</p>
+</li>
+<li>
+<p><strong>دیتابیس در حافظه (In-Memory Database)</strong>: استفاده از دیتابیس در حافظه به ما امکان می‌دهد تا با هر بار اجرای تست، داده‌ها از ابتدا بارگذاری شوند. این باعث می‌شود هر تست در محیطی کاملاً تازه اجرا شود.</p>
+</li>
+<li>
+<p><strong>بازگردانی وضعیت اولیه دیتابیس</strong>: اگر از دیتابیس واقعی استفاده می‌کنید، پس از اجرای هر تست می‌توان وضعیت دیتابیس را به حالت اولیه بازگرداند تا تست‌ها از هم مستقل باشند و اجرای تست‌ها تحت تأثیر تغییرات تست‌های قبلی قرار نگیرد.</p>
+</li>
+<li>
+<p><strong>بارگذاری داده‌های اولیه ثابت</strong>: برای هر تست، داده‌های اولیه و مستقل بارگذاری کنید که ثابت و بدون تغییر در هر اجرا باقی بمانند و از تأثیرگذاری تست‌ها روی هم جلوگیری شود.</p>
+</li>
+<li>
+<p><strong>استفاده از Mock یا Stub</strong>: به جای تکیه بر داده‌های واقعی، استفاده از Mock یا Stub باعث می‌شود تست‌ها بدون وابستگی به داده‌های واقعی و تغییرات محیطی اجرا شوند، در نتیجه اجرای تست‌ها قابل کنترل‌تر و قابل اعتمادتر خواهد بود.</p>
+</li>
+</ol>
+<p>این روش‌ها کمک می‌کنند تا تست‌ها در برابر تغییرات ناخواسته مقاوم باقی بمانند و هر تست در محیطی مستقل و بدون تأثیر از سایر تست‌ها اجرا شود.</p>
+</div>
+
+</body>
+</html>
