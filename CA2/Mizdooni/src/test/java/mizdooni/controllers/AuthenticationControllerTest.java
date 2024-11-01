@@ -31,7 +31,7 @@ class AuthenticationControllerTest {
 
     @BeforeEach
     void setUp() {
-        user1 = new User("Arshia", "aa", "arshiya.ataei81@gmail.com", new Address("Iran", "Tehran", "Amirabad"), User.Role.manager);;
+        user1 = new User("Arshia", "aa", "arshiya.ataei81@gmail.com", new Address("Iran", "Tehran", "Amirabad"), User.Role.manager);
         user2 = new User("Mobed", "bb", "mobed@gmail.com", new Address("Iran", "Tehran", "Valfajr"), User.Role.manager);
         MockitoAnnotations.openMocks(this);
     }

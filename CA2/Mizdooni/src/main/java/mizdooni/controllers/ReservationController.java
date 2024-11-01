@@ -33,7 +33,9 @@ public class ReservationController {
         ControllerUtils.checkRestaurant(restaurantId, restaurantService);
         LocalDate localDate = null;
         try {
-            localDate = LocalDate.parse(date, DATE_FORMATTER);
+            if (date != null) {
+                localDate = LocalDate.parse(date, DATE_FORMATTER);
+            }
         } catch (Exception ex) {
             throw new ResponseException(HttpStatus.BAD_REQUEST, PARAMS_BAD_TYPE);
         }
