@@ -10,13 +10,13 @@ public class RestaurantTest {
 
     Restaurant restaurant;  
     User manager;
-    User costumer;
+    User customer;
 
     @BeforeEach
     public void setup(){
         restaurant = new Restaurant("Little", manager, "Pizza", LocalTime.parse("08:00"), LocalTime.parse("22:00"), "Pizza midim, Napolitan!", new Address("Iran", "Tehran", "Vanak Park"), "Chara Nadarim ?");
         manager = new User("Arshia", "aa", "arshia@gmail.com", new Address("Iran", "Tehran", "Amir Abad"), User.Role.manager);
-        costumer = new User("Mobed", "Khake Pa", "mobed@gmail.com", new Address("Iran", "Tehran", "Valfajr"), User.Role.client);
+        customer = new User("Mobed", "Khake Pa", "mobed@gmail.com", new Address("Iran", "Tehran", "Valfajr"), User.Role.client);
     }       
 
     @Test
@@ -66,7 +66,7 @@ public class RestaurantTest {
         rating.service = 5;
         rating.ambiance = 5;
         rating.overall = 5;
-        Review review = new Review(costumer, rating, "Great food, great service", LocalDateTime.now());
+        Review review = new Review(customer, rating, "Great food, great service", LocalDateTime.now());
         restaurant.addReview(review);
         assert(restaurant.getReviews().contains(review));
     }
@@ -78,9 +78,9 @@ public class RestaurantTest {
         rating.service = 5;
         rating.ambiance = 5;
         rating.overall = 5;
-        Review review = new Review(costumer, rating, "Great food, great service", LocalDateTime.now());
+        Review review = new Review(customer, rating, "Great food, great service", LocalDateTime.now());
         restaurant.addReview(review);
-        Review review2 = new Review(costumer, rating, "Great food, great service, great ambience, overall perfect", LocalDateTime.now());
+        Review review2 = new Review(customer, rating, "Great food, great service, great ambience, overall perfect", LocalDateTime.now());
         restaurant.addReview(review2);
         assert(restaurant.getReviews().size() == 1);
         assert(restaurant.getReviews().contains(review2));
@@ -107,7 +107,7 @@ public class RestaurantTest {
         rating.service = 3;
         rating.ambiance = 3;
         rating.overall = 3;
-        Review review = new Review(costumer, rating, "Mid", LocalDateTime.now());
+        Review review = new Review(customer, rating, "Mid", LocalDateTime.now());
         restaurant.addReview(review);
         Rating average = restaurant.getAverageRating();
         assert(average.food == 3);
@@ -128,7 +128,7 @@ public class RestaurantTest {
         rating.service = 4;
         rating.ambiance = 5;
         rating.overall = 4.3;
-        Review review = new Review(costumer, rating, "Great ambience, not the best food", LocalDateTime.now());
+        Review review = new Review(customer, rating, "Great ambience, not the best food", LocalDateTime.now());
         restaurant.addReview(review);
         assert(restaurant.getStarCount() == 4);
     }
