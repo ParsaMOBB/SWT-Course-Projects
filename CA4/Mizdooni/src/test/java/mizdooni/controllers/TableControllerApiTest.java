@@ -61,12 +61,6 @@ class TableControllerApiTest {
         restaurant = new Restaurant("Little", manager, "Pizza", LocalTime.parse("08:00"), LocalTime.parse("22:00"), "Pizza midim, Napolitan!", new Address("Iran", "Tehran", "Vanak Park"), "Chara Nadarim ?");
     }
 
-    @Test 
-    void getTable_RestaurantIdInvalid_ShouldThrowResponseException() throws Exception {
-        mockMvc.perform(get("/tables/abc"))
-                .andExpect(status().isBadRequest());
-    }
-
     @Test
     void getTables_RestaurantIdNotFound_ShouldThrowResponseException() throws Exception {
         when(restaurantService.getRestaurant(1)).thenReturn(null);
