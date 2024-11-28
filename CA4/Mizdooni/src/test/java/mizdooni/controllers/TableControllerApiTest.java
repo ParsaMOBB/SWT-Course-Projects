@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mizdooni.exceptions.InvalidManagerRestaurant;
 import mizdooni.exceptions.UserNotManager;
 import mizdooni.model.Address;
 import mizdooni.model.Restaurant;
@@ -177,7 +178,7 @@ class TableControllerApiTest {
     @Test
     void addTable_InvalidManagerRestaurant_ShouldThrowResponseException() throws Exception {
         when(restaurantService.getRestaurant(1)).thenReturn(restaurant);
-        doThrow(new UserNotManager()).when(tableService).addTable(1, 4);
+        doThrow(new InvalidManagerRestaurant()).when(tableService).addTable(1, 4);
 
         Map<String, String> params = new HashMap<>();
         params.put("seatsNumber", "4");
@@ -188,7 +189,7 @@ class TableControllerApiTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.status").value(400))
                 .andExpect(jsonPath("$.success").value(false))
-                .andExpect(jsonPath("$.message").value("User is not a manager."));
+                .andExpect(jsonPath("$.message").value("The manager is not valid for this restaurant."));
     }
 
     @Test
