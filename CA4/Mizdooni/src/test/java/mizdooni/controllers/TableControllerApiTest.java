@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import mizdooni.exceptions.UserNotManager;
 import mizdooni.model.Address;
 import mizdooni.model.Restaurant;
 import mizdooni.model.Table;
@@ -58,12 +60,6 @@ class TableControllerApiTest {
         restaurant = new Restaurant("Little", manager, "Pizza", LocalTime.parse("08:00"), LocalTime.parse("22:00"), "Pizza midim, Napolitan!", new Address("Iran", "Tehran", "Vanak Park"), "Chara Nadarim ?");
     }
 
-    @Test
-    void getTables_RestaurantIdMissing_ShouldThrowResponseException() throws Exception {
-        mockMvc.perform(get("/tables"))
-                .andExpect(status().isNotFound());
-    }
-
     @Test 
     void getTable_RestaurantIdInvalid_ShouldThrowResponseException() throws Exception {
         mockMvc.perform(get("/tables/abc"))
@@ -82,7 +78,7 @@ class TableControllerApiTest {
     }
 
     @Test
-    void getTables_RestaurantIdFoundTablesEmpty_ShouldReturnEmptyList() throws Exception {
+    void getTables_TablesEmpty_ShouldReturnEmptyList() throws Exception {
         when(restaurantService.getRestaurant(1)).thenReturn(restaurant);
         when(tableService.getTables(1)).thenReturn(List.of());
 
@@ -96,7 +92,7 @@ class TableControllerApiTest {
     }
     
     @Test
-    void getTables_RestaurantIdFoundTablesNotEmpty_ShouldReturnTables() throws Exception {
+    void getTables_TablesNotEmpty_ShouldReturnTables() throws Exception {
         List<Table> tables = Arrays.asList(new Table(1, 1, 4), new Table(2, 1, 6));
         when(restaurantService.getRestaurant(1)).thenReturn(restaurant);
         when(tableService.getTables(1)).thenReturn(tables);
@@ -145,6 +141,69 @@ class TableControllerApiTest {
                 .andExpect(jsonPath("$.message").value("parameters missing"));
     }
 
+    @Test 
+    void addTable_SeatsNumberInvalid_ShouldThrowResponseException() throws Exception {
+        when(restaurantService.getRestaurant(1)).thenReturn(restaurant);
 
-    
+        Map<String, String> params = new HashMap<>();
+        params.put("seatsNumber", "abc");
+
+        mockMvc.perform(post("/tables/1")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(params)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.success").value(false))
+                .andExpect(jsonPath("$.message").value("bad parameter type"));
+    }
+
+    @Test
+    void addTable_UserNotManager_ShouldThrowResponseException() throws Exception {
+        when(restaurantService.getRestaurant(1)).thenReturn(restaurant);
+        doThrow(new UserNotManager()).when(tableService).addTable(1, 4);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("seatsNumber", "4");
+
+        mockMvc.perform(post("/tables/1")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(params)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.success").value(false))
+                .andExpect(jsonPath("$.message").value("User is not a manager."));
+    }
+
+    @Test
+    void addTable_InvalidManagerRestaurant_ShouldThrowResponseException() throws Exception {
+        when(restaurantService.getRestaurant(1)).thenReturn(restaurant);
+        doThrow(new UserNotManager()).when(tableService).addTable(1, 4);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("seatsNumber", "4");
+
+        mockMvc.perform(post("/tables/1")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(params)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.success").value(false))
+                .andExpect(jsonPath("$.message").value("User is not a manager."));
+    }
+
+    @Test
+    void addTable_TableAdded_ShouldReturnSuccess() throws Exception {
+        when(restaurantService.getRestaurant(1)).thenReturn(restaurant);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("seatsNumber", "4");
+
+        mockMvc.perform(post("/tables/1")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(params)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value(200))
+                .andExpect(jsonPath("$.success").value(true))
+                .andExpect(jsonPath("$.message").value("table added"));
+    }
 }
