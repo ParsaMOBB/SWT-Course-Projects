@@ -22,6 +22,15 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      - name: Verify Java Version
+        run: java -version
+
+      - name: Install Maven
+        run: sudo apt-get install -y maven
+
+      - name: Verify Maven Version
+        run: mvn -version
+
       - name: Build with Maven
         working-directory: CA5/Fesadyab
         run: mvn clean install
