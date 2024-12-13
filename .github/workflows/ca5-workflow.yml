@@ -35,7 +35,7 @@ jobs:
         run: mvn -version
 
       - name: Build and run tests
-        run: mvn -B test -f CA5/Fasedyab/pom.xml
+        run: mvn -B test -f CA5/Fesadyab/pom.xml
 
       - name: Generate Jacoco coverage report
         if: success()
