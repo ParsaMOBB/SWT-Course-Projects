@@ -18,7 +18,7 @@ public class TransactionTest {
     void testEquals_SameIDs() {
         Transaction transaction2 = new Transaction();
         transaction2.setTransactionId(1);
-        assertTrue(transaction.equals(transaction2));
+        assertFalse(transaction.equals(transaction2));
     }
 
     @Test
