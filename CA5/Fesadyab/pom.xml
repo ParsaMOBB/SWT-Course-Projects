@@ -33,6 +33,7 @@
             <version>5.11.3</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -57,7 +58,19 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.17.2</version>
+            </plugin>
+
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>pitest-repo</id>
+            <url>https://repo.pitest.org</url>
+        </repository>
+    </repositories>
 
 </project>
