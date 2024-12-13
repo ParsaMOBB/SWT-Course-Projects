@@ -12,13 +12,16 @@ public class TransactionTest {
     void setup() {
         transaction = new Transaction();
         transaction.setTransactionId(1);
+        transaction.setAccountId(1);
+        transaction.setAmount(100);
+        transaction.setDebit(true);
     }
 
     @Test
     void testEquals_SameIDs() {
         Transaction transaction2 = new Transaction();
         transaction2.setTransactionId(1);
-        assertNotEquals(transaction, transaction2);
+        assertEquals(transaction, transaction2);
     }
 
     @Test
