@@ -2,11 +2,9 @@ name: CA5 Fesadyab Pipeline
 
 on:
   push:
-    paths:
-      - 'CA5/**'
+    branches: [ main ]
   pull_request:
-    paths:
-      - 'CA5/**'
+    branches: [ main ]
 
 jobs:
   build-and-test:
@@ -25,27 +23,23 @@ jobs:
       - name: Verify Java Version
         run: java -version
 
-      - name: Set up settings-security.xml
-        run: echo "<settingsSecurity><master></master></settingsSecurity>" > ~/.m2/settings-security.xml
-
-
-      - name: Install Maven
-        run: sudo apt-get install -y maven
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: Verify Maven Version
         run: mvn -version
 
-      - name: Debug Test Discovery
-        working-directory: CA5/Fesadyab
-        run: mvn surefire:test -Dtest=domain.* -X
+      - name: Build with Maven
+        run: mvn -f CA5/Fesadyab/pom.xml clean verify
 
       - name: Run tests
         working-directory: CA5/Fesadyab
         run: mvn test -DfailIfNoTests=true
-
-      - name: Build and Verify
-        working-directory: CA5/Fesadyab
-        run: mvn verify
 
       - name: Generate Jacoco coverage report
         if: success()
