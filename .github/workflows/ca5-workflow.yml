@@ -31,6 +31,9 @@ jobs:
       - name: Verify Maven Version
         run: mvn -version
 
+      - name: Create dummy settings-security.xml
+        run: echo "<settingsSecurity></settingsSecurity>" > ~/.m2/settings-security.xml
+
       - name: Debug Test Discovery
         working-directory: CA5/Fesadyab
         run: mvn surefire:test -Dtest=domain.* -X
