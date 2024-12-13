@@ -224,4 +224,3 @@ public class TransactionEngineTest {
         assertEquals(1, transactionEngine.transactionHistory.size());
     }
 }
-
