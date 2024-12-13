@@ -31,6 +31,10 @@ jobs:
       - name: Verify Maven Version
         run: mvn -version
 
+      - name: Debug Test Discovery
+        working-directory: CA5/Fesadyab
+        run: mvn surefire:test -Dtest=domain.* -X
+
       - name: Run tests
         working-directory: CA5/Fesadyab
         run: mvn test -DfailIfNoTests=true

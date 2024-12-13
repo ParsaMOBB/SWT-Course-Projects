@@ -12,9 +12,6 @@ public class TransactionTest {
     void setup() {
         transaction = new Transaction();
         transaction.setTransactionId(1);
-        transaction.setAccountId(1);
-        transaction.setAmount(100);
-        transaction.setDebit(true);
     }
 
     @Test
