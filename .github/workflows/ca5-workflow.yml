@@ -31,13 +31,13 @@ jobs:
       - name: Verify Maven Version
         run: mvn -version
 
-      - name: Build with Maven
-        working-directory: CA5/Fesadyab
-        run: mvn clean install
-
       - name: Run tests
         working-directory: CA5/Fesadyab
-        run: mvn test
+        run: mvn test -DfailIfNoTests=true
+
+      - name: Build and Verify
+        working-directory: CA5/Fesadyab
+        run: mvn verify
 
       - name: Generate Jacoco coverage report
         if: success()

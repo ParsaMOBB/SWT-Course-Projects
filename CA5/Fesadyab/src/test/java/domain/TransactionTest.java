@@ -18,18 +18,18 @@ public class TransactionTest {
     void testEquals_SameIDs() {
         Transaction transaction2 = new Transaction();
         transaction2.setTransactionId(1);
-        assertFalse(transaction.equals(transaction2));
+        assertNotEquals(transaction, transaction2);
     }
 
     @Test
     void testEquals_DifferentIDs() {
         Transaction transaction2 = new Transaction();
         transaction2.setTransactionId(2);
-        assertFalse(transaction.equals(transaction2));
+        assertNotEquals(transaction, transaction2);
     }
 
     @Test
     void testEquals_DifferentClasses() {
-        assertFalse(transaction.equals(new Object()));
+        assertNotEquals(new Object(), transaction);
     }
 }
