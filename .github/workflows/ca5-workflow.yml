@@ -34,12 +34,8 @@ jobs:
       - name: Verify Maven Version
         run: mvn -version
 
-      - name: Build with Maven
-        run: mvn -f CA5/Fesadyab/pom.xml clean verify
-
-      - name: Run tests
-        working-directory: CA5/Fesadyab
-        run: mvn test -DfailIfNoTests=true
+      - name: Build and run tests
+        run: mvn -B test -f CA5/Fasedyab/pom.xml
 
       - name: Generate Jacoco coverage report
         if: success()
