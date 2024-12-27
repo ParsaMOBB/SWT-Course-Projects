@@ -3,6 +3,8 @@ package mizdooni.stepDefinition;
 import io.cucumber.java.en.*;
 import static org.junit.jupiter.api.Assertions.*;
 import mizdooni.model.*;
+
+import java.io.Console;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -36,8 +38,8 @@ public class StepDefinition {
         assertTrue(user.getReservations().contains(reservation));
     }
 
-    @Given("a review with food {int}, service {int}, ambiance {int}, and overall {int}")
-    public void a_review_with_food_service_ambiance_and_overall(Integer food, Integer service, Integer ambiance, Integer overall) {
+    @Given("a review with food {double}, service {double}, ambiance {double}, and overall {double}")
+    public void a_review_with_food_service_ambiance_and_overall(double food, double service, double ambiance, double overall) {
         rating = new Rating(food, service, ambiance, overall);
         review = createReview("Bad bood");
     }
@@ -45,6 +47,7 @@ public class StepDefinition {
     @When("the user adds the review to the restaurant")
     public void the_user_adds_the_review_to_the_restaurant() {
         restaurant.addReview(review);
+        System.out.println(review.getRating().food);
     }
 
     @Then("the restaurant should have the review in its reviews list")
@@ -57,13 +60,13 @@ public class StepDefinition {
         rating = restaurant.getAverageRating();
     }
 
-    @Then("the average rating should be food {int}, service {int}, ambiance {int}, and overall {int}")
-    public void the_average_rating_should_be_food_service_ambiance_and_overall(Integer food, Integer service, Integer ambiance, Integer overall) {
+    @Then("the average rating should be food {double}, service {double}, ambiance {double}, and overall {double}")
+    public void the_average_rating_should_be_food_service_ambiance_and_overall(double food, double service, double ambiance, double overall) {
         Rating averageRating = restaurant.getAverageRating();
-        assertEquals((int) food, averageRating.food, "Food rating does not match");
-        assertEquals((int) service, averageRating.service, "Service rating does not match");
-        assertEquals((int) ambiance, averageRating.ambiance, "Ambiance rating does not match");
-        assertEquals((int) overall, averageRating.overall, "Overall rating does not match");
+        assertEquals(food, averageRating.food, "Food rating does not match");
+        assertEquals(service, averageRating.service, "Service rating does not match");
+        assertEquals(ambiance, averageRating.ambiance, "Ambiance rating does not match");
+        assertEquals(overall, averageRating.overall, "Overall rating does not match");
     }
 
     public User createUser(String username, String email,User.Role userRole){

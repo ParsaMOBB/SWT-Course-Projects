@@ -61,7 +61,8 @@ public class Restaurant {
             average.ambiance += r.getRating().ambiance;
             average.overall += r.getRating().overall;
         }
-
+        System.out.println("KIRRR");
+        System.out.println(average.food);
         if (!reviews.isEmpty()) {
             average.food /= reviews.size();
             average.service /= reviews.size();
