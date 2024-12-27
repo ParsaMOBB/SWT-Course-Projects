@@ -16,15 +16,20 @@ public class StepDefinition {
     private Review review;
     private Rating rating;
 
-    @Given("a user with username {string} and email {string}")
-    public void a_user_with_username_and_email(String username, String email) {
-        user = createUser(username, email, User.Role.client);
+    @Given("a first user")
+    public void a_first_user() {
+        user = createUser("arshia", "arshia.ataei81@gmail.com", User.Role.client);
     }
 
-    @Given("a restaurant named {string} managed by user {string}")
-    public void a_restaurant_named_managed_by_user(String restaurantName, String managerUsername) {
-        User manager = createUser(managerUsername, "mobed@gmail.com", User.Role.manager);
-        restaurant = createRestaurant(restaurantName, manager);
+    @Given("a second user")
+    public void a_second_user() {
+        user = createUser("parsa", "parsa@gmail.com", User.Role.client);
+    }
+
+    @Given("a restaurant")
+    public void a_restaurant_named_managed_by_user() {
+        User manager = createUser("mobed", "mobed@gmail.com", User.Role.manager);
+        restaurant = createRestaurant("Little Italy", manager);
     }
 
     @When("the user adds a reservation to the restaurant")
