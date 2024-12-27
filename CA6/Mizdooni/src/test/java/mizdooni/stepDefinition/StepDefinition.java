@@ -69,9 +69,41 @@ public class StepDefinition {
         assertEquals(overall, averageRating.overall, "Overall rating does not match");
     }
 
+    @Then("the user should have the restaurant reserved")
+    public void the_user_should_have_the_restaurant_reserved() {
+        assertTrue(user.checkReserved(restaurant), "The user does not have the restaurant reserved.");
+    }
+
+    @Then("the reservation list of the user should contain {int} reservations")
+    public void the_reservation_list_of_the_user_should_contain_reservations(int count) {
+        assertEquals(count, user.getReservations().size(), "The reservation count does not match.");
+    }
+
+    @Then("the restaurant should only have {int} review")
+    public void the_restaurant_should_only_have_review(int count) {
+        assertEquals(count, restaurant.getReviews().size(), "The review count does not match.");
+    }
+
+    @Then("the restaurant should have {int} reviews in its reviews list")
+    public void the_restaurant_should_have_reviews_in_its_reviews_list(int count) {
+        assertEquals(count, restaurant.getReviews().size(), "The review count does not match.");
+    }
+
+    @Then("the review in the list should have food {double}, service {double}, ambiance {double}, and overall {double}")
+    public void the_review_in_the_list_should_have_food_service_ambiance_and_overall(double food, double service, double ambiance, double overall) {
+        Review currentReview = restaurant.getReviews().get(0);
+        Rating currentRating = currentReview.getRating();
+
+        assertEquals(food, currentRating.food, "Food rating does not match.");
+        assertEquals(service, currentRating.service, "Service rating does not match.");
+        assertEquals(ambiance, currentRating.ambiance, "Ambiance rating does not match.");
+        assertEquals(overall, currentRating.overall, "Overall rating does not match.");
+    }
+
     public User createUser(String username, String email,User.Role userRole){
         return new User(username, "aa", email, new Address("Iran", "Tehran", "Amirabad"), userRole);
     }
+
 
     public Address createAddress(String street){
         return new Address("Iran", "Tehran", street);
